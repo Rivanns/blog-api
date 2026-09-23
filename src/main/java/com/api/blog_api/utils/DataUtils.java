@@ -2,7 +2,7 @@ package com.api.blog_api.utils;
 
 import com.api.blog_api.model.PostModel;
 import com.api.blog_api.repository.PostRepository;
-//import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,7 +21,7 @@ public class DataUtils {
 
         List<PostModel> postList = new ArrayList<>();
         PostModel post1 = new PostModel();
-        post1.setAutor("Sonic");
+        post1.setAutor("Homem-Aranha");
         post1.setData(LocalDate.now());
         post1.setTexto("Lorem Ipsum is simply dummy text of the printing and typesetting industry."
                 + " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, "
@@ -36,10 +36,10 @@ public class DataUtils {
                 + "remaining essentially unchanged. It was popularised in the 1960s with the release of"
                 + " Letraset sheets containing Lorem Ipsum passages, and more recently with desktop "
                 + "publishing software like Aldus PageMaker including versions of Lorem Ipsum.");
-        post1.setTitulo("Docker");
+        post1.setTitulo("Homem aranha de volta pra casa");
 
         PostModel post2 = new PostModel();
-        post2.setAutor("Ben10");
+        post2.setAutor("Homem de ferro");
         post2.setData(LocalDate.now());
         post2.setTexto("Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
                 + "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, "
@@ -48,7 +48,7 @@ public class DataUtils {
                 + " remaining essentially unchanged. It was popularised in the 1960s with the release of "
                 + "Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing "
                 + "software like Aldus PageMaker including versions of Lorem Ipsum.");
-        post2.setTitulo("API REST");
+        post2.setTitulo("Liga da Justiça");
 
         postList.add(post1);
         postList.add(post2);
