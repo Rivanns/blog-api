@@ -21,7 +21,7 @@ public class ComentarioModel implements Serializable {
     private LocalDate data;
 
     @Lob
-    @Column(name = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String comentario;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -32,9 +32,9 @@ public class ComentarioModel implements Serializable {
 
     public ComentarioModel(String comentario, PostModel post) {
 
-        this.data = LocalDate.now();
         this.comentario = comentario;
         this.post = post;
+        this.data = LocalDate.now();
     }
 
     public UUID getId() {
