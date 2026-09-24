@@ -12,5 +12,5 @@ public interface PostService {
     List<PostResponseDto> findAll();
     PostResponseDto findById(UUID id);
     PostResponseDto createPost(PostRequestDto dto);
-    
+
 }
