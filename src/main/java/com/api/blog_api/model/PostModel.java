@@ -96,4 +96,9 @@ public class PostModel implements Serializable {
         this.comentarios = comentarios;
     }
 
+    public void adicionarComentario (ComentarioModel comentario){
+        comentarios.add(comentario);
+        comentario.setPost(this);
+    }
+
 }
