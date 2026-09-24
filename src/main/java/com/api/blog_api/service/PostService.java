@@ -1,6 +1,7 @@
 package com.api.blog_api.service;
 
 import com.api.blog_api.dto.request.PostRequestDto;
+import com.api.blog_api.dto.response.ComentarioResponseDto;
 import com.api.blog_api.dto.response.PostResponseDto;
 
 import java.util.List;
@@ -11,6 +12,5 @@ public interface PostService {
     List<PostResponseDto> findAll();
     PostResponseDto findById(UUID id);
     PostResponseDto createPost(PostRequestDto dto);
-
-
+    
 }
