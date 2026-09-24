@@ -74,7 +74,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     @Transactional
-    public ComentarioResponseDto addComentario(UUID id, ComentarioRequestDto dto){
+    public ComentarioResponseDto addComentario(UUID postId, ComentarioRequestDto dto){
 
         Optional<PostModel> optionalPost = postRepository.findById(postId);
         PostModel post = optionalPost.get();
