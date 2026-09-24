@@ -1,5 +1,6 @@
 package com.api.blog_api.service;
 
+import com.api.blog_api.dto.request.ComentarioRequestDto;
 import com.api.blog_api.dto.request.PostRequestDto;
 import com.api.blog_api.dto.response.ComentarioResponseDto;
 import com.api.blog_api.dto.response.PostResponseDto;
@@ -13,4 +14,5 @@ public interface PostService {
     PostResponseDto findById(UUID id);
     PostResponseDto createPost(PostRequestDto dto);
 
+    ComentarioResponseDto addComentario(UUID id, ComentarioRequestDto dto);
 }
