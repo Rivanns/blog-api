@@ -5,6 +5,8 @@ import com.api.blog_api.dto.request.PostRequestDto;
 import com.api.blog_api.dto.response.ComentarioResponseDto;
 import com.api.blog_api.dto.response.PostResponseDto;
 import com.api.blog_api.service.PostService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@Tag(name = "Posts e comentários", description = "Operações do Blog API")
 @RestController
 @RequestMapping("/api")
 public class PostController {
@@ -23,21 +26,30 @@ public class PostController {
         this.postService = postService;
     }
 
+    //LISTA TODOS OS POSTS
+    @Operation(summary = "Lista posts com paginação")
     @GetMapping("/posts")
     public ResponseEntity<List<PostResponseDto>> getAllPosts(){
         return ResponseEntity.ok(postService.findAll());
     }
 
+    //RETORNA UM POST INDIVIDUAL
+    @Operation(summary = "Retorna um post pelo ID selecionado")
     @GetMapping("/posts/{id}")
     public ResponseEntity<PostResponseDto> getPostById(@PathVariable UUID id){
         return ResponseEntity.ok(postService.findById(id));
     }
 
+    //CRIA UM POST
+    @Operation(summary = "Cria um novo post")
     @PostMapping("/newpost")
     public ResponseEntity<PostResponseDto> createPost(@RequestBody @Valid PostRequestDto dto){
         PostResponseDto created = postService.createPost(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
+
+    //CRIA UM COMENTÁRIO
+    @Operation(summary = "Adiciona um comentário em um post selecionado pelo ID")
     @PostMapping("/comentarios/{postId}")
     public ResponseEntity<ComentarioResponseDto> createComentario(@PathVariable UUID postId,
                                                                @RequestBody @Valid ComentarioRequestDto dto){
