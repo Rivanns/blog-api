@@ -10,6 +10,8 @@ import com.api.blog_api.model.ComentarioModel;
 import com.api.blog_api.model.PostModel;
 import com.api.blog_api.repository.ComentarioRepository;
 import com.api.blog_api.repository.PostRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,16 +39,26 @@ public class PostServiceImpl implements PostService{
     }
 
 
+//    @Override
+//    @Transactional(readOnly = true)
+//    public List<PostResponseDto> findAll(){
+//        List<PostModel> posts = postRepository.findAll();
+//        List<PostResponseDto> dtos = new ArrayList<>();
+//
+//        for (PostModel post : posts){
+//            dtos.add(postMapper.toDto(post));
+//        }
+//        return dtos;
+//    }
+
     @Override
     @Transactional(readOnly = true)
-    public List<PostResponseDto> findAll(){
-        List<PostModel> posts = postRepository.findAll();
-        List<PostResponseDto> dtos = new ArrayList<>();
+    public Page<PostResponseDto> findAll(Pageable pageable){
 
-        for (PostModel post : posts){
-            dtos.add(postMapper.toDto(post));
-        }
-        return dtos;
+        Page<PostModel> posts = postRepository.findAll(pageable);
+        return posts.map(post -> {PostResponseDto dto = postMapper.toDto(post);
+        return dto;
+        });
     }
 
 
