@@ -11,6 +11,7 @@ import com.api.blog_api.model.PostModel;
 import com.api.blog_api.repository.ComentarioRepository;
 import com.api.blog_api.repository.PostRepository;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -61,6 +62,23 @@ public class PostServiceImpl implements PostService{
         });
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public Page<PostResponseDto> findAll(Pageable pageable, String titulo){
+        Page<PostModel> posts;
+        if (titulo == null || titulo.isBlank()){
+            posts = postRepository.findAll(pageable);}
+        else {
+            posts = postRepository.findByTituloContainingIgnoreCase(titulo, pageable);
+        }
+        List<PostResponseDto> response = new ArrayList<>();
+        for (PostModel post : posts.getContent()){
+            PostResponseDto dto = postMapper.toDto(post);
+            response.add(dto);
+        }
+        return new PageImpl<>(response, pageable, posts.getTotalElements());
+    }
+
 
     @Override
     @Transactional(readOnly = true)
@@ -98,4 +116,40 @@ public class PostServiceImpl implements PostService{
 
         return comentarioMapper.toDto(saved);
     }
+
+
+//    @Transactional
+//    public PostResponseDto updatePost(UUID id, PostRequestDto dto) {
+//        Optional<PostModel> optionalPost = this.postRepository.findById(id);
+//        if (optionalPost.isEmpty()) {
+//            throw new RuntimeException("Post não encontrado com o ID: " + String.valueOf(id));
+//        } else {
+//            PostModel post = (PostModel)optionalPost.get();
+//            this.postMapper.updateEntityFromDto(dto, post);
+//            PostModel updatedPost = (PostModel)this.postRepository.save(post);
+//            return this.postMapper.toDto(updatedPost);
+//        }
+//    }
+//
+//    @Transactional
+//    public void deletePost(UUID id) {
+//        Optional<PostModel> optionalPost = this.postRepository.findById(id);
+//        if (optionalPost.isEmpty()) {
+//            throw new RuntimeException("Post não encontrado com o ID: " + String.valueOf(id));
+//        } else {
+//            PostModel post = (PostModel)optionalPost.get();
+//            this.postRepository.delete(post);
+//        }
+//    }
+
+//    @Transactional
+//    public void deleteComentario(UUID comentarioId) {
+//        Optional<ComentarioModel> optionalComentario = this.comentarioRepository.findById(comentarioId);
+//        if (optionalComentario.isEmpty()) {
+//            throw new RuntimeException("Comentário não encontrado com o ID: " + String.valueOf(comentarioId));
+//        } else {
+//            ComentarioModel comentario = (ComentarioModel)optionalComentario.get();
+//            this.comentarioRepository.delete(comentario);
+//        }
+//    }
 }
