@@ -118,38 +118,59 @@ public class PostServiceImpl implements PostService{
     }
 
 
-//    @Transactional
-//    public PostResponseDto updatePost(UUID id, PostRequestDto dto) {
-//        Optional<PostModel> optionalPost = this.postRepository.findById(id);
-//        if (optionalPost.isEmpty()) {
-//            throw new RuntimeException("Post não encontrado com o ID: " + String.valueOf(id));
-//        } else {
-//            PostModel post = (PostModel)optionalPost.get();
-//            this.postMapper.updateEntityFromDto(dto, post);
-//            PostModel updatedPost = (PostModel)this.postRepository.save(post);
-//            return this.postMapper.toDto(updatedPost);
-//        }
-//    }
-//
-//    @Transactional
-//    public void deletePost(UUID id) {
-//        Optional<PostModel> optionalPost = this.postRepository.findById(id);
-//        if (optionalPost.isEmpty()) {
-//            throw new RuntimeException("Post não encontrado com o ID: " + String.valueOf(id));
-//        } else {
-//            PostModel post = (PostModel)optionalPost.get();
-//            this.postRepository.delete(post);
-//        }
-//    }
+    @Transactional
+    public PostResponseDto updatePost(UUID id, PostRequestDto dto) {
 
-//    @Transactional
-//    public void deleteComentario(UUID comentarioId) {
-//        Optional<ComentarioModel> optionalComentario = this.comentarioRepository.findById(comentarioId);
-//        if (optionalComentario.isEmpty()) {
-//            throw new RuntimeException("Comentário não encontrado com o ID: " + String.valueOf(comentarioId));
-//        } else {
-//            ComentarioModel comentario = (ComentarioModel)optionalComentario.get();
-//            this.comentarioRepository.delete(comentario);
-//        }
-//    }
+        Optional<PostModel> optionalPost = this.postRepository.findById(id);
+
+        if (optionalPost.isEmpty()) {
+            throw new RuntimeException("Post não encontrado com o ID: " + String.valueOf(id));
+        } else {
+            PostModel post = (PostModel)optionalPost.get();
+            this.postMapper.updateEntityFromDto(dto, post);
+            PostModel updatedPost = (PostModel)this.postRepository.save(post);
+            return this.postMapper.toDto(updatedPost);
+        }
+    }
+
+    @Transactional
+    public void deletePost(UUID id) {
+
+        Optional<PostModel> optionalPost = this.postRepository.findById(id);
+
+        if (optionalPost.isEmpty()) {
+            throw new RuntimeException("Post não encontrado com o ID: " + String.valueOf(id));
+        } else {
+            PostModel post = (PostModel)optionalPost.get();
+            this.postRepository.delete(post);
+        }
+    }
+
+    @Transactional
+    public void deleteComentario(UUID comentarioId) {
+
+        Optional<ComentarioModel> optionalComentario = this.comentarioRepository.findById(comentarioId);
+
+        if (optionalComentario.isEmpty()) {
+            throw new RuntimeException("Comentário não encontrado com o ID: " + String.valueOf(comentarioId));
+        } else {
+            ComentarioModel comentario = (ComentarioModel)optionalComentario.get();
+            this.comentarioRepository.delete(comentario);
+        }
+    }
+
+    @Transactional
+    public ComentarioResponseDto updateComentario(UUID comentarioId, ComentarioRequestDto dto){
+
+        Optional<ComentarioModel> optionalComentario = this.comentarioRepository.findById(comentarioId);
+
+        if (optionalComentario.isEmpty()){
+            throw new RuntimeException("Comentário não encontrado com o ID: " + String.valueOf(comentarioId));
+        } else {
+            ComentarioModel comentario = (ComentarioModel)optionalComentario.get();
+            this.comentarioMapper.updateEntityFromDto(dto, comentario);
+            ComentarioModel updatedComentario = (ComentarioModel)this.comentarioRepository.save(comentario);
+            return this.comentarioMapper.toDto(updatedComentario);
+        }
+    }
 }

@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.plaf.SeparatorUI;
 import java.util.List;
 import java.util.UUID;
 
@@ -63,6 +64,23 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
+    //ATUALIZA UM POST
+    @Operation(summary = "Atualiza um post")
+    @PutMapping("/atualizapost/{id}")
+    public ResponseEntity<PostResponseDto> updatePost(@PathVariable UUID id, @RequestBody @Valid PostRequestDto dto){
+        PostResponseDto updated = postService.updatePost(id, dto);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(updated);
+
+    }
+
+    //DELETA UM POST
+    @Operation(summary = "Deleta um post")
+    @DeleteMapping("/deletarpost/{id}")
+    public ResponseEntity<Object> deletePost(@PathVariable UUID id){
+        Object deleted = postService;
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(deleted);
+    }
+
     //CRIA UM COMENTÁRIO
     @Operation(summary = "Adiciona um comentário em um post selecionado pelo ID")
     @PostMapping("/comentarios/{postId}")
@@ -70,6 +88,23 @@ public class PostController {
                                                                @RequestBody @Valid ComentarioRequestDto dto){
 
         return ResponseEntity.status(HttpStatus.CREATED).body(postService.addComentario(postId, dto));
+    }
+
+    //ATUALIZA UM COMENTÁRIO
+    @Operation(summary = "Atualiza um comentário")
+    @PostMapping("/atualizarcomentario/{comentarioId}")
+    public ResponseEntity<ComentarioResponseDto> updateComentario(@PathVariable UUID comentarioId,
+                                                                  @RequestBody @Valid ComentarioResponseDto dto){
+        ComentarioResponseDto comentarioUpdated = postService.updateComentario(comentarioId, dto);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(comentarioUpdated);
+    }
+
+    //DELETA UM COMENTÁRIO
+    @Operation(summary = "Deleta um comentário")
+    @DeleteMapping("/deletarcomentario/{comentarioId}")
+    public ResponseEntity<Object> deleteComentario(@PathVariable UUID comentarioId){
+        Object comentarioDeleted = postService;
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(comentarioDeleted);
     }
 
 }

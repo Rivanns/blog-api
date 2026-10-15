@@ -17,6 +17,9 @@ public interface PostService {
     PostResponseDto findById(UUID id);
     PostResponseDto createPost(PostRequestDto dto);
     Page<PostResponseDto> findAll(Pageable pageable, String titulo);
-
     ComentarioResponseDto addComentario(UUID id, ComentarioRequestDto dto);
+    PostResponseDto updatePost (UUID id, PostRequestDto dto);
+    void deletePost (UUID id);
+    void deleteComentario (UUID comentarioId);
+    ComentarioResponseDto updateComentario(UUID comentarioId, ComentarioResponseDto dto);
 }

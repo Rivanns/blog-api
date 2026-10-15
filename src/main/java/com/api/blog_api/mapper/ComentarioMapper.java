@@ -29,4 +29,9 @@ public class ComentarioMapper {
                 entity.getComentario()
         );
     }
+
+    public void updateEntityFromDto(ComentarioRequestDto dto, ComentarioModel entity){
+        if (dto != null && entity != null)
+        entity.setComentario(dto.comentario());
+    }
 }
