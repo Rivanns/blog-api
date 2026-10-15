@@ -6,6 +6,8 @@ import com.api.blog_api.dto.response.ComentarioResponseDto;
 import com.api.blog_api.dto.response.PostResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,5 +23,5 @@ public interface PostService {
     PostResponseDto updatePost (UUID id, PostRequestDto dto);
     void deletePost (UUID id);
     void deleteComentario (UUID comentarioId);
-    ComentarioResponseDto updateComentario(UUID comentarioId, ComentarioResponseDto dto);
+    ComentarioResponseDto updateComentario(UUID comentarioId, ComentarioRequestDto dto);
 }
