@@ -75,7 +75,7 @@ public class PostController {
 
     //DELETA UM POST
     @Operation(summary = "Deleta um post")
-    @DeleteMapping("/deletarpost/{id}")
+    @DeleteMapping("/deletapost/{id}")
     public ResponseEntity<Object> deletePost(@PathVariable UUID id){
         Object deleted = postService;
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(deleted);
@@ -92,7 +92,7 @@ public class PostController {
 
     //ATUALIZA UM COMENTÁRIO
     @Operation(summary = "Atualiza um comentário")
-    @PostMapping("/atualizarcomentario/{comentarioId}")
+    @PostMapping("/atualizacomentario/{comentarioId}")
     public ResponseEntity<ComentarioResponseDto> updateComentario(@PathVariable UUID comentarioId,
                                                                   @RequestBody @Valid ComentarioRequestDto dto){
         ComentarioResponseDto comentarioUpdated = postService.updateComentario(comentarioId, dto);
@@ -101,7 +101,7 @@ public class PostController {
 
     //DELETA UM COMENTÁRIO
     @Operation(summary = "Deleta um comentário")
-    @DeleteMapping("/deletarcomentario/{comentarioId}")
+    @DeleteMapping("/deletacomentario/{comentarioId}")
     public ResponseEntity<Object> deleteComentario(@PathVariable UUID comentarioId){
         Object comentarioDeleted = postService;
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(comentarioDeleted);
