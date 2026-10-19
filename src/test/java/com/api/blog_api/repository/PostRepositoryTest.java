@@ -5,6 +5,8 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 @DataJpaTest
 public class PostRepositoryTest {
@@ -22,6 +24,18 @@ public class PostRepositoryTest {
 
         //Assert
         Assertions.assertThat(postSalvo).isNotNull();
+    }
+
+    @Test
+    void deveBuscarPostPeloId(){
+
+        PostModel post = new PostModel("Giovanni", "Aulas", "Aulas");
+
+        PostModel postSalvo = repository.save(post);
+
+        PostModel postBuscar = repository.findById(postSalvo.getId()).get();
+        Assertions.assertThat(postBuscar).isNotNull();
+        Assertions.assertThat(postBuscar.getId()).isEqualTo(postSalvo.getId());
     }
 
 }
