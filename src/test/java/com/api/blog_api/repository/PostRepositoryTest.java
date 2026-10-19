@@ -10,7 +10,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 
-@DataJpaTest(properties = {"spring.jpa.hibernate.ddl-auto=create-drop", "spring.flyway.enabled=false"})
+@DataJpaTest
 public class PostRepositoryTest {
 
     @Autowired
