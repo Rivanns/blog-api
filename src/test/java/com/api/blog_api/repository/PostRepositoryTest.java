@@ -41,4 +41,16 @@ public class PostRepositoryTest {
         Assertions.assertThat(postBuscar.getId()).isEqualTo(postSalvo.getId());
     }
 
+    @Test
+    void deveListarPosts(){
+        PostModel post1 = new PostModel("Giovanni", "Aulas", "texto1");
+        PostModel post2 = new PostModel("Giovanni", "Aulas", "texto2");
+
+        repository.save(post1);
+        repository.save(post2);
+
+        var posts = repository.findAll();
+        Assertions.assertThat(posts).hasSize(2);
+
+    }
 }
