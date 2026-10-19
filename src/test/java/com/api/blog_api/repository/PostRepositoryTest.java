@@ -53,4 +53,16 @@ public class PostRepositoryTest {
         Assertions.assertThat(posts).hasSize(2);
 
     }
+
+    @Test
+    void deveBuscarPostsPeloTituloIgnorandoMaiusculasEMinusculas(){
+        PostModel post  = new PostModel("Giovanni", "Aulas de Java", "texto");
+        repository.save(post);
+
+        Page<PostModel> resultado = repository.findByTituloContainingIgnoreCase("aulas", PageRequest.of(0, 10));
+
+        Assertions.assertThat(resultado.getContent()).hasSize(1);
+        Assertions.assertThat(resultado.getContent().get(0).getTitulo()).isEqualTo("Aulas de Java");
+    }
+
 }
