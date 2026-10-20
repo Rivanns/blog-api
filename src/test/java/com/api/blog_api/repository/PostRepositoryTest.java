@@ -19,7 +19,10 @@ public class PostRepositoryTest {
     @Test
     void deveSalvarERetornarPost(){
         //Arrange
-        PostModel post = new PostModel("Giovanni", "Aulas", "A semana toda têm aulas");
+        PostModel post = new PostModel(
+                "Giovanni",
+                "Aulas",
+                "A semana toda têm aulas");
 
         //Act
         PostModel postSalvo = repository.save(post);
@@ -31,7 +34,10 @@ public class PostRepositoryTest {
     @Test
     void deveBuscarPostPeloId(){
 
-        PostModel post = new PostModel("Giovanni", "Aulas", "Aulas");
+        PostModel post = new PostModel(
+                "Giovanni",
+                "Aulas",
+                "Aulas");
 
         PostModel postSalvo = repository.save(post);
 
@@ -42,8 +48,14 @@ public class PostRepositoryTest {
 
     @Test
     void deveListarPosts(){
-        PostModel post1 = new PostModel("Giovanni", "Aulas", "texto1");
-        PostModel post2 = new PostModel("Giovanni", "Aulas", "texto2");
+        PostModel post1 = new PostModel(
+                "Giovanni",
+                "Aulas",
+                "texto1");
+        PostModel post2 = new PostModel(
+                "Giovanni",
+                "Aulas",
+                "texto2");
 
         repository.save(post1);
         repository.save(post2);
@@ -55,13 +67,28 @@ public class PostRepositoryTest {
 
     @Test
     void deveBuscarPostsPeloTituloIgnorandoMaiusculasEMinusculas(){
-        PostModel post  = new PostModel("Giovanni", "Aulas de Java", "texto");
+        PostModel post  = new PostModel(
+                "Giovanni",
+                "Aulas",
+                "texto");
+        PostModel post1 = new PostModel(
+                "Giovanni",
+                "Aulas",
+                "texto1");
+        PostModel post2 = new PostModel(
+                "Giovanni",
+                "Aulas",
+                "texto2");
+
         repository.save(post);
+        repository.save(post1);
+        repository.save(post2);
 
-        Page<PostModel> resultado = repository.findByTituloContainingIgnoreCase("aulas", PageRequest.of(0, 10));
+        Page<PostModel> resultado = repository.findByTituloContainingIgnoreCase(
+                "aulas", PageRequest.of(0, 10));
 
-        Assertions.assertThat(resultado.getContent()).hasSize(1);
-        Assertions.assertThat(resultado.getContent().get(0).getTitulo()).isEqualTo("Aulas de Java");
+        Assertions.assertThat(resultado.getContent()).hasSize(3);
+        Assertions.assertThat(resultado.getContent().get(0).getTitulo()).isEqualTo("Aulas");
     }
 
 }
