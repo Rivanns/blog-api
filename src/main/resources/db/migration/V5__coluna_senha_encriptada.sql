@@ -1,0 +1,5 @@
+--INSERT INTO usuario(username, password, role, enabled)
+--VALUES ('admin', '$2a10$e...HASH_GERADO_ADMIN...' ,'ADMIN', true);
+--
+--INSERT INTO usuario(username, password, role, enabled)
+--VALUES ('USUARIO', '$2a10$e...HASH_GERADO_USER...' ,'USER', true);
