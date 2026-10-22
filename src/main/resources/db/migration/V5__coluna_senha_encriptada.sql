@@ -1,5 +1,5 @@
---INSERT INTO usuario(username, password, role, enabled)
---VALUES ('admin', '$2a10$e...HASH_GERADO_ADMIN...' ,'ADMIN', true);
---
---INSERT INTO usuario(username, password, role, enabled)
---VALUES ('USUARIO', '$2a10$e...HASH_GERADO_USER...' ,'USER', true);
+INSERT INTO tb_usuario(username, password, role, enabled)
+VALUES ('admin', '$2a$10$n1lfxhnn6/lFUhkgyg3XaOMD914fh/s/OmK86DUIC5VL4h.YM9ww2' ,'ADMIN', true);
+
+INSERT INTO tb_usuario(username, password, role, enabled)
+VALUES ('USUARIO', '$2a$10$n1lfxhnn6/lFUhkgyg3XaOMD914fh/s/OmK86DUIC5VL4h.YM9ww2' ,'USER', true);
